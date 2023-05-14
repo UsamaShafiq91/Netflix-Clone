@@ -6,6 +6,8 @@ target 'Netflix-Clone' do
   use_frameworks!
 
   # Pods for Netflix-Clone
+  pod 'Alamofire'
+  pod 'Kingfisher'
 
   target 'Netflix-CloneTests' do
     inherit! :search_paths
