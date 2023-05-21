@@ -15,7 +15,11 @@ extension UIStoryboard {
 }
 
 enum Main: String {
-    case Home = "HomeViewController"
+    case Movie = "MovieViewController"
     case MovieDetail = "MovieDetailViewController"
+    
+    case TvSeries = "TvSeriesViewController"
+    case TvSeriesDetail = "TvSeriesDetailViewController"
+    case SeasonDetail = "SeasonDetailViewController"
 }
 

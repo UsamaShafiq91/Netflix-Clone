@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="232" id="8OV-dX-GnK" customClass="SeasonCell" customModule="Netflix_Clone" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="613" height="232"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8OV-dX-GnK" id="fXa-YX-SdP">
+                <rect key="frame" x="0.0" y="0.0" width="613" height="232"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bRn-VM-CJc">
+                        <rect key="frame" x="16" y="16" width="84" height="120"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="84" id="Hyb-gq-oRi"/>
+                            <constraint firstAttribute="height" constant="120" id="dYO-C8-TjH"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y6q-78-s11">
+                        <rect key="frame" x="116" y="16" width="481" height="200"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="120" id="e1h-zV-0rd"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="bRn-VM-CJc" firstAttribute="top" secondItem="fXa-YX-SdP" secondAttribute="top" constant="16" id="5Y4-AG-qTS"/>
+                    <constraint firstAttribute="trailing" secondItem="Y6q-78-s11" secondAttribute="trailing" constant="16" id="AaO-zN-KHU"/>
+                    <constraint firstItem="bRn-VM-CJc" firstAttribute="leading" secondItem="fXa-YX-SdP" secondAttribute="leading" constant="16" id="BFu-G9-TPl"/>
+                    <constraint firstItem="Y6q-78-s11" firstAttribute="top" secondItem="fXa-YX-SdP" secondAttribute="top" constant="16" id="J7l-Ao-UOJ"/>
+                    <constraint firstItem="Y6q-78-s11" firstAttribute="leading" secondItem="bRn-VM-CJc" secondAttribute="trailing" constant="16" id="cU5-dk-6I5"/>
+                    <constraint firstAttribute="bottom" secondItem="Y6q-78-s11" secondAttribute="bottom" constant="16" id="fXb-DQ-8xZ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="seasonDetailLabel" destination="Y6q-78-s11" id="PRO-vY-Fp3"/>
+                <outlet property="seasonImageView" destination="bRn-VM-CJc" id="l9D-0B-FYB"/>
+            </connections>
+            <point key="canvasLocation" x="203.81679389312976" y="88.028169014084511"/>
+        </tableViewCell>
+    </objects>
+</document>

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class MovieViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -32,10 +32,10 @@ class HomeViewController: UIViewController {
     }
     
     func loadCategories() {
-        let nowPlayingCategory = Category(name: "Now Playing", type: CategoryType.movie.rawValue, path: "/3/movie/now_playing")
-        let popularCategory = Category(name: "Popular", type: CategoryType.movie.rawValue, path: "/3/movie/popular")
-        let topRatedCategory = Category(name: "Top Rated", type: CategoryType.movie.rawValue, path: "/3/movie/top_rated")
-        let upcomingCategory = Category(name: "Upcoming", type: CategoryType.movie.rawValue, path: "/3/movie/upcoming")
+        let nowPlayingCategory = Category(name: .nowPlaying, type: CategoryType.movie.rawValue, path: "/3/movie/now_playing")
+        let popularCategory = Category(name: .popular, type: CategoryType.movie.rawValue, path: "/3/movie/popular")
+        let topRatedCategory = Category(name: .topRated, type: CategoryType.movie.rawValue, path: "/3/movie/top_rated")
+        let upcomingCategory = Category(name: .upcoming, type: CategoryType.movie.rawValue, path: "/3/movie/upcoming")
         
         categories = [nowPlayingCategory,
                       popularCategory,
@@ -46,14 +46,14 @@ class HomeViewController: UIViewController {
     }
 }
 
-extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+extension MovieViewController: UITableViewDelegate, UITableViewDataSource {
     
     func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = .clear
         
-        tableView.register(UINib(nibName: CategoryRowCell.NibName, bundle: nil), forCellReuseIdentifier: CategoryRowCell.reuseIdentifier)
+        tableView.register(UINib(nibName: MovieCategoryRowCell.NibName, bundle: nil), forCellReuseIdentifier: MovieCategoryRowCell.reuseIdentifier)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -61,7 +61,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let categoryRowCell = tableView.dequeueReusableCell(withIdentifier: CategoryRowCell.reuseIdentifier, for: indexPath) as? CategoryRowCell else {
+        guard let categoryRowCell = tableView.dequeueReusableCell(withIdentifier: MovieCategoryRowCell.reuseIdentifier, for: indexPath) as? MovieCategoryRowCell else {
             return UITableViewCell()
         }
         
@@ -72,13 +72,14 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension HomeViewController: ItemSelectionProtocol {
-    func selectedItem(item: Movie) {
+extension MovieViewController: ItemSelectionProtocol {
+    func selectedItem(id: Int?, type: String) {
         let movieDetailVC = UIStoryboard.mainStoryboard().instantiateViewController(withIdentifier: Main.MovieDetail.rawValue) as? MovieDetailViewController ?? MovieDetailViewController()
         
-        movieDetailVC.movie = item
+        movieDetailVC.movieId = id
         movieDetailVC.modalPresentationStyle = .fullScreen
         
         self.present(movieDetailVC, animated: true)
     }
+
 }

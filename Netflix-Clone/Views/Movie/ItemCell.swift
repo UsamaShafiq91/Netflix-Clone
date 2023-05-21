@@ -13,7 +13,7 @@ class ItemCell: UICollectionViewCell, ReusableView, NibLoadableView {
     
     @IBOutlet weak var imageView: UIImageView!
     
-    var item: Movie?
+    var itemImage: String?
         
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -24,10 +24,10 @@ class ItemCell: UICollectionViewCell, ReusableView, NibLoadableView {
         imageView.image = nil
     }
     
-    func setData(item: Movie) {
-        self.item = item
+    func setData(itemImage: String?) {
+        self.itemImage = itemImage
         
-        guard let imageUrl = URL(string: "https://image.tmdb.org/t/p/w500/\(item.poster_path ?? "")") else {
+        guard let imageUrl = URL(string: "https://image.tmdb.org/t/p/w500/\(itemImage ?? "")") else {
             return
         }
         

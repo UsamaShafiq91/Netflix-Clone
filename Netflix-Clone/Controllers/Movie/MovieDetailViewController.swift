@@ -17,7 +17,7 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet weak var moviePlotLabel: UILabel!
     @IBOutlet weak var trailerWebView: WKWebView!
 
-    var movie: Movie?
+    var movieId: Int?
     var movieDetailService: MovieDetailService?
     var movieDetail: MovieDetail?
     var credits: Credits?
@@ -36,7 +36,7 @@ class MovieDetailViewController: UIViewController {
     }
     
     func getMovieCredits() {
-        guard let movieId = movie?.id else { return }
+        guard let movieId = movieId else { return }
         
         movieDetailService?.getMovieCredits(movieId: movieId, completion: { [weak self] response in
             
@@ -49,7 +49,7 @@ class MovieDetailViewController: UIViewController {
     }
     
     func getMovieVideos() {
-        guard let movieId = movie?.id else { return }
+        guard let movieId = movieId else { return }
         
         movieDetailService?.getMovieVideos(movieId: movieId, completion: { [weak self] response in
             
@@ -76,13 +76,13 @@ class MovieDetailViewController: UIViewController {
             trailer = anyVideo
         }
             
-        guard let videoId = trailer?.key, let videoUrl = URL(string: "https://www.youtube.com/watch?v=\(videoId)") else { return }
+        guard let videoId = trailer?.key, let videoUrl = URL(string: "https://www.youtube.com/embed/\(videoId)") else { return }
         
         trailerWebView.load(URLRequest(url: videoUrl))
     }
     
     func getMovieDetail() {
-        guard let movieId = movie?.id else { return }
+        guard let movieId = movieId else { return }
         
         movieDetailService?.getMovieDetail(movieId: movieId, completion: { [weak self] response in
             

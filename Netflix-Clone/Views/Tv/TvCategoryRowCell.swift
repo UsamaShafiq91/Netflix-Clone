@@ -8,13 +8,13 @@
 import Foundation
 import UIKit
 
-class CategoryRowCell: UITableViewCell, ReusableView, NibLoadableView {
+class TvCategoryRowCell: UITableViewCell, ReusableView, NibLoadableView {
     
     @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var itemsCollectionView: UICollectionView!
     
-    var movieItemsService: MovieItemsService?
-    var movies: [Movie] = []
+    var tvItemsService: TvSeriesItemsService?
+    var tvShows: [TvSeries] = []
     
     var currentPage = 1
     var isPageLoading = false
@@ -34,7 +34,7 @@ class CategoryRowCell: UITableViewCell, ReusableView, NibLoadableView {
     }
     
     func setupService() {
-        movieItemsService = MovieServiceAdapter()
+        tvItemsService = TvSeriesServiceAdapter()
     }
     
     func setData(category: Category) {
@@ -50,14 +50,14 @@ class CategoryRowCell: UITableViewCell, ReusableView, NibLoadableView {
         
         isPageLoading = true
         
-        movieItemsService?.getMovieItems(path: path, page: currentPage, completion: { [weak self] response in
+        tvItemsService?.getTvSeriesItems(path: path, page: currentPage, completion: { [weak self] response in
             
             self?.isPageLoading = false
             
             guard let data = response.data else { return }
             
             if let results = data.results {
-                self?.movies.append(contentsOf: results)
+                self?.tvShows.append(contentsOf: results)
             }
             
             if let _ = data.page {
@@ -69,7 +69,7 @@ class CategoryRowCell: UITableViewCell, ReusableView, NibLoadableView {
     }
 }
 
-extension CategoryRowCell: UICollectionViewDelegate, UICollectionViewDataSource {
+extension TvCategoryRowCell: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func setupCollectionView() {
         itemsCollectionView.delegate = self
@@ -80,7 +80,7 @@ extension CategoryRowCell: UICollectionViewDelegate, UICollectionViewDataSource 
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return movies.count
+        return tvShows.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -88,9 +88,9 @@ extension CategoryRowCell: UICollectionViewDelegate, UICollectionViewDataSource 
             return UICollectionViewCell()
         }
         
-        itemCell.setData(item: movies[indexPath.row])
+        itemCell.setData(itemImage: tvShows[indexPath.row].poster_path)
         
-        if(indexPath.row == (movies.count - 1)) {
+        if(indexPath.row == (tvShows.count - 1)) {
             loadCategoryItems()
         }
         
@@ -98,6 +98,6 @@ extension CategoryRowCell: UICollectionViewDelegate, UICollectionViewDataSource 
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        itemSelectionProtocol?.selectedItem(item: movies[indexPath.row])
+        itemSelectionProtocol?.selectedItem(id: tvShows[indexPath.row].id, type: CategoryType.tvShow.rawValue)
     }
 }

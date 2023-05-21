@@ -8,5 +8,5 @@
 import Foundation
 
 protocol ItemSelectionProtocol: AnyObject {
-    func selectedItem(item: Movie)
+    func selectedItem(id: Int?, type: String)
 }

@@ -14,30 +14,17 @@ class CustomTabBarController: UITabBarController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        let homeTab = UIStoryboard.mainStoryboard().instantiateViewController(withIdentifier: Main.Home.rawValue) as? HomeViewController ?? HomeViewController()
-//        homeTab.tabBarItem.image = UIImage(systemName: "house")
-//        
-//        UIImage(named: "Dashboard-Grey").tint
+        let movieTab = UIStoryboard.mainStoryboard().instantiateViewController(withIdentifier: Main.Movie.rawValue) as? MovieViewController ?? MovieViewController()
+        movieTab.tabBarItem = UITabBarItem(title: .movie, image: UIImage(systemName: "film"), selectedImage: UIImage(systemName: "film"))
+        
+        let tvShowTab = UIStoryboard.mainStoryboard().instantiateViewController(withIdentifier: Main.TvSeries.rawValue) as? TvSeriesViewController ?? TvSeriesViewController()
+        tvShowTab.tabBarItem = UITabBarItem(title: .tv, image: UIImage(systemName: "tv"), selectedImage: UIImage(systemName: "tv"))
 
-        homeTab.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house")?.withTintColor(.red))
+        tabBar.backgroundColor = .backgroundColor
+        tabBar.barTintColor = .backgroundColor
+        tabBar.tintColor = .white
 
-
-//        let tab2 = UINavigationController(rootViewController: UpcomingViewController())
-//        let tab3 = UINavigationController(rootViewController: SearchViewController())
-//        let tab4 = UINavigationController(rootViewController: DownloadViewController())
-//
-//        tab2.tabBarItem.image = UIImage(systemName: "play.circle")
-//        tab3.tabBarItem.image = UIImage(systemName: "magnifyingglass")
-//        tab4.tabBarItem.image = UIImage(systemName: "arrow.down.to.line")
-//
-//        tab1.title = "Home"
-//        tab2.title = "Upcoming"
-//        tab3.title = "Top Search"
-//        tab4.title = "Downloads"
-        tabBar.tintColor = .label
-
-        setViewControllers([homeTab], animated: true)
-
+        setViewControllers([movieTab, tvShowTab], animated: true)
     }
     
 }
