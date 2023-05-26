@@ -16,12 +16,16 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet weak var movieDetailLabel: UILabel!
     @IBOutlet weak var moviePlotLabel: UILabel!
     @IBOutlet weak var trailerWebView: WKWebView!
+    @IBOutlet weak var castCollectionView: UICollectionView!
+    
 
     var movieId: Int?
     var movieDetailService: MovieDetailService?
     var movieDetail: MovieDetail?
     var credits: Credits?
     var videos: Videos?
+    
+    var casts: [Cast] = []
 
     override func viewDidLoad() {
         getMovieData()
@@ -99,6 +103,7 @@ class MovieDetailViewController: UIViewController {
         setupMovieTitle()
         setupMovieDetail()
         setupMoviePlot()
+        setupCollectionView()
     }
     
     func setupMovieImage() {
@@ -119,11 +124,6 @@ class MovieDetailViewController: UIViewController {
     
     func setupMovieDetail() {
         let movieDetailAttributed = NSMutableAttributedString()
-        
-        if let casts = credits?.cast, casts.count > 0 {
-            movieDetailAttributed.append(NSAttributedString(string: "\(String.cast): ", attributes: [.font: UIFont.keywordFont, .foregroundColor: UIColor.titleColor]))
-            movieDetailAttributed.append(NSAttributedString(string: "\(getValidValue(value: casts.compactMap({$0.name}).joined(separator: ", ")))\n", attributes: [.font: UIFont.normalFont, .foregroundColor: UIColor.descriptionColor]))
-        }
         
         movieDetailAttributed.append(NSAttributedString(string: "\(String.budget): ", attributes: [.font: UIFont.keywordFont, .foregroundColor: UIColor.titleColor]))
         movieDetailAttributed.append(NSAttributedString(string: "\(getValidValue(value: movieDetail?.budget))\n", attributes: [.font: UIFont.normalFont, .foregroundColor: UIColor.descriptionColor]))
@@ -180,5 +180,36 @@ class MovieDetailViewController: UIViewController {
     
     @IBAction func backButtonTapped() {
         dismiss(animated: true)
+    }
+}
+
+extension MovieDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func setupCollectionView() {
+        castCollectionView.delegate = self
+        castCollectionView.dataSource = self
+        castCollectionView.backgroundColor = .clear
+
+        castCollectionView.register(UINib(nibName: CastCell.NibName, bundle: nil), forCellWithReuseIdentifier: CastCell.reuseIdentifier)
+        
+        if let casts = credits?.cast {
+            self.casts = casts
+        }
+        
+        castCollectionView.reloadData()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return casts.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let castCell = collectionView.dequeueReusableCell(withReuseIdentifier: CastCell.reuseIdentifier, for: indexPath) as? CastCell else {
+            return UICollectionViewCell()
+        }
+        
+        castCell.setData(cast: casts[indexPath.row])
+        
+        return castCell
     }
 }

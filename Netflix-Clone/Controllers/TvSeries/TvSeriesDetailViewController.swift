@@ -17,6 +17,7 @@ class TvSeriesDetailViewController: UIViewController {
     @IBOutlet weak var tvSeriesPlotLabel: UILabel!
     @IBOutlet weak var trailerWebView: WKWebView!
     @IBOutlet weak var seasonTableView: ContentSizedTableView!
+    @IBOutlet weak var castCollectionView: UICollectionView!
 
     var seriesId: Int?
     var tvSeriesDetailService: TvSeriesDetailService?
@@ -24,6 +25,7 @@ class TvSeriesDetailViewController: UIViewController {
     var credits: Credits?
     var videos: Videos?
     var seasons: [Season] = []
+    var casts: [Cast] = []
 
     override func viewDidLoad() {
         
@@ -103,6 +105,7 @@ class TvSeriesDetailViewController: UIViewController {
         setupTvSeriesDetail()
         setupTvSeriesPlot()
         setupTableView()
+        setupCollectionView()
     }
     
     func setupTvSeriesImage() {
@@ -124,12 +127,6 @@ class TvSeriesDetailViewController: UIViewController {
     func setupTvSeriesDetail() {
         let tvSeriesDetailAttributed = NSMutableAttributedString()
         
-        if let casts = credits?.cast, casts.count > 0 {
-            tvSeriesDetailAttributed.append(NSAttributedString(string: "\(String.cast): ", attributes: [.font: UIFont.keywordFont, .foregroundColor: UIColor.titleColor]))
-            tvSeriesDetailAttributed.append(NSAttributedString(string: "\(getValidValue(value: casts.compactMap({$0.name}).joined(separator: ", ")))\n", attributes: [.font: UIFont.normalFont, .foregroundColor: UIColor.descriptionColor]))
-        }
-        
-
         tvSeriesDetailAttributed.append(NSAttributedString(string: "\(String.genres): ", attributes: [.font: UIFont.keywordFont, .foregroundColor: UIColor.titleColor]))
         tvSeriesDetailAttributed.append(NSAttributedString(string: "\(getValidValue(value: tvSeriesDetail?.genres?.compactMap({$0.name}).joined(separator: ", ")))\n", attributes: [.font: UIFont.normalFont, .foregroundColor: UIColor.descriptionColor]))
         
@@ -230,5 +227,36 @@ extension TvSeriesDetailViewController: UITableViewDelegate, UITableViewDataSour
         seasonDetailVC.modalPresentationStyle = .fullScreen
         
         self.present(seasonDetailVC, animated: true)
+    }
+}
+
+extension TvSeriesDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func setupCollectionView() {
+        castCollectionView.delegate = self
+        castCollectionView.dataSource = self
+        castCollectionView.backgroundColor = .clear
+
+        castCollectionView.register(UINib(nibName: CastCell.NibName, bundle: nil), forCellWithReuseIdentifier: CastCell.reuseIdentifier)
+        
+        if let casts = credits?.cast {
+            self.casts = casts
+        }
+        
+        castCollectionView.reloadData()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return casts.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let castCell = collectionView.dequeueReusableCell(withReuseIdentifier: CastCell.reuseIdentifier, for: indexPath) as? CastCell else {
+            return UICollectionViewCell()
+        }
+        
+        castCell.setData(cast: casts[indexPath.row])
+        
+        return castCell
     }
 }
