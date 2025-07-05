@@ -32,7 +32,6 @@ This app replicates core Netflix features for iOS:
 | ![Home](https://github.com/user-attachments/assets/69a6ab85-416a-446b-808f-269f69f7508e) | ![Detail](https://github.com/user-attachments/assets/982fa8f8-9b9b-4eaa-99fc-1c9d527e84b0) | ![Player](https://github.com/user-attachments/assets/3daf386c-e4fe-4966-bb61-9c94a77d273e) | 
 |-------------------------------|-----------------------------------|-----------------------------------|  
 | ![Series](https://github.com/user-attachments/assets/86148527-b39b-4a37-8ca7-a7270373214a) | ![Series](https://github.com/user-attachments/assets/b8b61bf9-8109-4fd4-b28a-fd8739d0c6dd) | ![Series](https://github.com/user-attachments/assets/42ed9b08-c89c-441f-8003-a1d9812443b6) |
-| -----------------------------------|-----------------------------------|-----------------------------------|
   
 
 ---
