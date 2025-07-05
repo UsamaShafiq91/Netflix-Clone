@@ -26,7 +26,16 @@ This app replicates core Netflix features for iOS:
 - 👀 Browse trending movies and series  
 - 🎞 View detailed info: plot, trailer, cast  
 - 📺 Explore seasons and episodes for TV shows  
-- 🌐 Fetch real-time data using TMDB’s REST API  
+- 🌐 Fetch real-time data using TMDB’s REST API
+
+  ### 📸 Screenshots
+  ![Simulator Screenshot - iPhone 15 - 2025-07-05 at 12 59 45](https://github.com/user-attachments/assets/69a6ab85-416a-446b-808f-269f69f7508e)
+  ![Simulator Screenshot - iPhone 15 - 2025-07-05 at 12 59 56](https://github.com/user-attachments/assets/982fa8f8-9b9b-4eaa-99fc-1c9d527e84b0)
+  ![Simulator Screenshot - iPhone 15 - 2025-07-05 at 13 00 04](https://github.com/user-attachments/assets/3daf386c-e4fe-4966-bb61-9c94a77d273e)
+  ![Simulator Screenshot - iPhone 15 - 2025-07-05 at 13 00 17](https://github.com/user-attachments/assets/86148527-b39b-4a37-8ca7-a7270373214a)
+  ![Simulator Screenshot - iPhone 15 - 2025-07-05 at 13 00 28](https://github.com/user-attachments/assets/b8b61bf9-8109-4fd4-b28a-fd8739d0c6dd)
+  ![Simulator Screenshot - iPhone 15 - 2025-07-05 at 13 00 33](https://github.com/user-attachments/assets/42ed9b08-c89c-441f-8003-a1d9812443b6)
+  
 
 ---
 
