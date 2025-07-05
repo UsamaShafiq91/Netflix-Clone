@@ -15,7 +15,6 @@ A fully functional Netflix-style iOS app built using **Swift**, powered by **TMD
 6. [Usage](#usage)  
 7. [Contributing](#contributing)  
 8. [License](#license)  
-9. [Author](#author)
 
 ---
 
